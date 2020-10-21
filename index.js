@@ -5,6 +5,8 @@ const app = express();
 
 PORT = process.env.PORT
 
+app.set('viewengine','ejs');
+
 app.get('/',(req,res) =>{
     res.send('Hello world')
 })
