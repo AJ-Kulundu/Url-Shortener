@@ -26,6 +26,24 @@ app.post('/short', async (req,res) =>{
     await record.save();
     
     res.redirect('/')
-})
+});
+
+app.get('/:shortId', async (req,res) =>{
+  // get the shortId parameter
+    const shortId = req.params.shortId;
+
+  //get the long Url from the database
+    const rec = await ShortUrl.findOne({short:shortId});
+  //if null set status to 404
+  if(!rec) return res.status(404)
+
+  //if not null increment the click count
+   rec.clicks++
+   await rec.save()
+
+  //redirect the user to the original link
+   res.redirect(rec.full)
+
+});
 
 app.listen(PORT, ()=> console.log(`Server started on localhost:${PORT}`))
