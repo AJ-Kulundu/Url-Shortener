@@ -1,11 +1,13 @@
 const express = require('express');
 require('dotenv').config();
 const mongoose = require('mongoose');
+const cors = require('cors');
 const ShortUrl = require('./models/url')
 
 const app = express();
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
+app.use(cors());
 
 PORT = process.env.PORT
 
